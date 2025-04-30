@@ -1,0 +1,36 @@
+name: Deploy to Hugging Face
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        lfs: true  # Required for FAISS index files
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy to Hugging Face
+      uses: huggingface/huggingface_hub@v2
+      with:
+        hf_repo: "FaizanArif/Bahishti_Zewar_RAG"
+        hf_token: ${{ secrets.BahishtiZawer }}
+        local_dir: "./"
+        include: "*.py, *.txt, *.pdf, faiss_dl_book_index/**"
+        exclude: "*.ipynb, .gitignore"
+        commit_message: "Deploy via GitHub Actions: ${{ github.sha }}"
