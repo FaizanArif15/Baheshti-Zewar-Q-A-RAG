@@ -1,9 +1,9 @@
 # .gitattributes
 faiss_dl_book_index/* filter=lfs diff=lfs merge=lfs -text
 *.pdf filter=lfs diff=lfs merge=lfs -text
-
-
 *.py text
 *.txt text
 *.md text
 *.pdf binary
+*.faiss filter=lfs diff=lfs merge=lfs -text
+*.pkl filter=lfs diff=lfs merge=lfs -text
