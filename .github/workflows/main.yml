@@ -30,11 +30,15 @@ jobs:
           echo -e "[user]\nemail = faizanarif1884@gmail.com\nname = FaizanArif" > ~/.gitconfig
           git config --global credential.helper store
           echo "https://FaizanArif:${HF_TOKEN}@huggingface.co" > ~/.git-credentials
-
+      
+      - name: Pull Git LFS files
+        run: |
+          git lfs install
+          git lfs pull
+          
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.BAHISHTIZAWER }}
         run: |
-          git lfs install
           git remote add space https://huggingface.co/spaces/FaizanArif/Bahishti_Zewar_RAG
           git push space main --force
