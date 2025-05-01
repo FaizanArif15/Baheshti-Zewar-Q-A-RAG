@@ -11,7 +11,7 @@ import gradio as gr
 from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
-groq_api_key = os.getenv("GROQ_API_KEY")
+groq_api_key = os.getenv("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")
 # Initialize components
 def initialize_rag():
     # Load embeddings
