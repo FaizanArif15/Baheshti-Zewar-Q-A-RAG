@@ -14,6 +14,9 @@ pinned: false
 
 A Gradio app using RAG and LLaMA-3 (via Groq) to answer questions from Bahishti Zewar.
 
+# Here is the link of Hugging Face Space
+
+https://huggingface.co/spaces/FaizanArif/Bahishti_Zewar_RAG
 
 ## Powered by
 - LangChain
