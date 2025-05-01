@@ -14,20 +14,26 @@ jobs:
         lfs: true
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: "3.11"
 
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install huggingface-hub
 
     - name: Deploy to Hugging Face
-      uses: peaceiris/actions-huggingface@v2
-      with:
-        hf_token: ${{ secrets.BahishtiZawer }}
-        hf_repo: "FaizanArif/Bahishti_Zewar_RAG"
-        publishing_dir: "./"
-        repository_visibility: "public"
-        keep_history: true
+      run: |
+        python -m pip install --upgrade pip
+        python -c "
+from huggingface_hub import HfApi, Repository
+api = HfApi(token='${{ secrets.BahishtiZawer }}')
+api.upload_folder(
+    folder_path='./',
+    repo_id='${{ secrets.FaizanArif }}/Bahishti_Zewar_RAG',
+    repo_type='space',
+    ignore_patterns='*.ipynb,.gitignore'
+)
+"
       
