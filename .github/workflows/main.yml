@@ -3,8 +3,6 @@ name: Deploy to Hugging Face
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   deploy:
@@ -13,7 +11,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        lfs: true  # Required for FAISS index files
+        lfs: true
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -22,15 +20,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     - name: Deploy to Hugging Face
-      uses: huggingface/huggingface_hub@v2
+      uses: peaceiris/actions-huggingface@v2
       with:
-        hf_repo: "FaizanArif/Bahishti_Zewar_RAG"
         hf_token: ${{ secrets.BahishtiZawer }}
-        local_dir: "./"
-        include: "*.py, *.txt, *.pdf, faiss_dl_book_index/**"
-        exclude: "*.ipynb, .gitignore"
-        commit_message: "Deploy via GitHub Actions: ${{ github.sha }}"
+        hf_repo: "FaizanArif/Bahishti_Zewar_RAG"
+        publishing_dir: "./"
+        repository_visibility: "public"
+        keep_history: true
+      
