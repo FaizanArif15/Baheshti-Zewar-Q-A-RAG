@@ -8,10 +8,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 import gradio as gr
-
+from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
-
+groq_api_key = os.getenv("GROQ_API_KEY")
 # Initialize components
 def initialize_rag():
     # Load embeddings
